@@ -24,13 +24,40 @@ module Api
       end
 
       def create
-        @
+        @record = @current_user.records.create(result: record_params[:result], item_id: record_params[:itemId], date: record_params[:date])
+
+        if @record.valid?
+          render json: @record, status: 201
+        else
+          render json: { error: 'Track could not be created.'}, status: 404
+        end
       end
 
       def update
+        if @record.update(result: record_params[:result], item_id: record_params[:itemId], date: record_params[:date])
+          render json: @record, status: 200
+        else
+          render json: {error: 'Track could not be opdated.'}, status: 422
+        end
       end
 
       def destroy
+        if @record
+          @record.destroy
+          render json: {message: 'Sucessfully deleted', deleted_record: @record}, status: 200
+        else
+          render json: {error: 'Sorry, Record could not be deleted'}, status: 422
+        end
+      end
+
+      private
+
+      def set_record
+        @record = @current_user.records.find(params[:id])
+      end
+
+      def record_params
+        params.require(:record).permit(:result, :item_id, :date, :itemId)
       end
     end
   end
