@@ -44,12 +44,13 @@ module Api
 
       private
 
-      def item_params
-        params.require(:item).permit(:title, :unit, :icon, :target)
-      end
+        def item_params
+          params.require(:item).permit(:title, :unit, :icon, :target)
+        end
 
-      def set_item
-        @item = Item.find(params[:id])
+        def set_item
+          @item = Item.find(params[:id])
+        end
       end
     end
   end

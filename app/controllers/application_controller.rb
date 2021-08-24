@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::API
-  SECRET_KEY = Rails.application.credentials.jwt[:secret].to_s
-  EXPIRES_IN = Rails.application.credentials.jwt[:expires_in]
+  # SECRET_KEY = Rails.application.credentials.jwt[:secret].to_s
+  SECRET_KEY = ENV.fetch("SECRET_KEY")
+  # EXPIRES_IN = Rails.application.credentials.jwt[:expires_in]
 
   def authorized
     render json: {message: 'Please log in'}, status: 401 unless logged_in?
