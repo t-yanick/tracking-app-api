@@ -26,6 +26,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'rack-cors'
 
 gem 'hirb'
+gem 'rubocop', '>= 1.0', '< 2.0'
 
 gem 'jwt'
 gem 'dotenv-rails', '~> 2.7'
