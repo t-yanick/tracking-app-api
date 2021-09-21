@@ -1,8 +1,8 @@
 module Api
   module V1
     class ItemsController < ApplicationController
-      before_action :authorized, except: [index, show]
-      before_action :set_item, only: [show, update, destroy]
+      before_action :authorized, except: %i[index show]
+      before_action :set_item, only: %i[show update destroy]
 
       def index
         @items = Item.order_by_title

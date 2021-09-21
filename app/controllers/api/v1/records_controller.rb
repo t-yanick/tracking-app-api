@@ -2,7 +2,7 @@ module Api
   module V1
     class RecordsController < ApplicationController
       before_action :authorized
-      before_action :set_record, only: [show, update, destroy]
+      before_action :set_record, only: %i[show update destroy]
 
       def index
         @records = Record.all_records(@current_user)
