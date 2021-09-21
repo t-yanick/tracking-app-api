@@ -15,4 +15,15 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
              methods: %i[get post put patch delete options head],
              credentials: true
   end
+
+  # for production
+  allow do
+    origins 'https://tracking-frontend-app.herokuapp.com'
+
+    resource '*',
+             headers: :any,
+             expose: %w[access-token id],
+             methods: %i[get post put patch delete options head],
+             credentials: true
+  end
 end
