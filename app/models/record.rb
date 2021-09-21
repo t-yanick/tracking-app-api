@@ -3,7 +3,7 @@ class Record < ApplicationRecord
   belongs_to :user
   validates_presence_of :result, :date
 
-  scope :order_by_date, -> { order(date: desc)}
+  scope :order_by_date, -> { order(date: desc) }
 
   def self.all_records(user)
     user.records.order_by_date.joins(:item).select('

@@ -13,7 +13,7 @@ module Api
         if @item
           render json: @item, status: 200
         else
-          render json: {error: 'Sorry, the item was not found'}, status: 404
+          render json: { error: 'Sorry, the item was not found' }, status: 404
         end
       end
 
@@ -22,7 +22,7 @@ module Api
         if @item.save
           render json: @item, status: 201
         else
-          render json: {error: 'Item could not be created'}, status: 404
+          render json: { error: 'Item could not be created' }, status: 404
         end
       end
 
@@ -30,19 +30,19 @@ module Api
         if @item.update(item_params)
           render json: @item, status: 200
         else
-          render json: {error: 'Item could not be updated'}, status: 404
-      end
-
-      def destroy
-        if @item
-          @item.destroy
-          render json: {message: 'Sucessfully deleted', deleted_item: @item}, status: 200
-        else
-          render json: {error: 'Item could not be deleted'}, status: 404
+          render json: { error: 'Item could not be updated' }, status: 404
         end
-      end
 
-      private
+        def destroy
+          if @item
+            @item.destroy
+            render json: { message: 'Sucessfully deleted', deleted_item: @item }, status: 200
+          else
+            render json: { error: 'Item could not be deleted' }, status: 404
+          end
+        end
+
+        private
 
         def item_params
           params.require(:item).permit(:title, :unit, :icon, :target)

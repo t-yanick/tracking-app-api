@@ -9,7 +9,7 @@ module Api
         @record_dates = Record.all_record_dates(@current_user)
 
         if @records
-          render json: {records: @records, record_dates: @record_dates}, status: 200
+          render json: { records: @records, record_dates: @record_dates }, status: 200
         else
           render json: 'No record yet'
         end
@@ -19,17 +19,18 @@ module Api
         if @record
           render json: @record, status: 200
         else
-          render json: {error: 'Record not found'}, status: 404
+          render json: { error: 'Record not found' }, status: 404
         end
       end
 
       def create
-        @record = @current_user.records.create(result: record_params[:result], item_id: record_params[:itemId], date: record_params[:date])
+        @record = @current_user.records.create(result: record_params[:result], item_id: record_params[:itemId],
+                                               date: record_params[:date])
 
         if @record.valid?
           render json: @record, status: 201
         else
-          render json: { error: 'Track could not be created.'}, status: 404
+          render json: { error: 'Track could not be created.' }, status: 404
         end
       end
 
@@ -37,16 +38,16 @@ module Api
         if @record.update(result: record_params[:result], item_id: record_params[:itemId], date: record_params[:date])
           render json: @record, status: 200
         else
-          render json: {error: 'Track could not be opdated.'}, status: 422
+          render json: { error: 'Track could not be opdated.' }, status: 422
         end
       end
 
       def destroy
         if @record
           @record.destroy
-          render json: {message: 'Sucessfully deleted', deleted_record: @record}, status: 200
+          render json: { message: 'Sucessfully deleted', deleted_record: @record }, status: 200
         else
-          render json: {error: 'Sorry, Record could not be deleted'}, status: 422
+          render json: { error: 'Sorry, Record could not be deleted' }, status: 422
         end
       end
 
