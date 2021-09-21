@@ -75,6 +75,7 @@ GEM
     ffi (1.15.4)
     globalid (0.5.2)
       activesupport (>= 5.0)
+    hirb (0.7.3)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
     jwt (2.2.3)
@@ -160,6 +161,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.4)
   byebug
   dotenv-rails (~> 2.7)
+  hirb
   jwt
   listen (~> 3.3)
   pg (~> 1.1)
