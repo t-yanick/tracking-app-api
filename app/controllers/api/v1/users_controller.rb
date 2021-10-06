@@ -2,6 +2,7 @@ module Api
   module V1
     class UsersController < ApplicationController
       before_action :authorized, only: [:show]
+      # skip_before_action :verify_authenticity_token
 
       def show
         render json: @current_user, status: 200
