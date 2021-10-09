@@ -5,10 +5,10 @@ module Api
         @user = User.find_by(username: user_params[:username])
 
         if @user&.authenticate(user_params[:password])
-          token = encode_token({user_id: @user.id})
-          render json: {logged_in: true, user: user_data(@user), token: token}
+          token = encode_token({ user_id: @user.id })
+          render json: { logged_in: true, user: user_data(@user), token: token }
         else
-          render json: {error: 'Please provide correct username and password'}, status: 401
+          render json: { error: 'Please provide correct username and password' }, status: 401
         end
       end
 
@@ -19,12 +19,11 @@ module Api
       end
 
       def user_data(user)
-        obj ={
+        {
           id: user.id,
           username: user.username,
           admin: user.admin
         }
-        obj
       end
     end
   end

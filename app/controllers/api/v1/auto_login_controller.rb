@@ -5,9 +5,9 @@ module Api
         @user = User.find(user_params[:user_id])
 
         if @user
-          render json: {logged_in: true, user: user_data(@user)}
+          render json: { logged_in: true, user: user_data(@user) }
         else
-          render json: {error: 'Please provide correct username and password'}, status: 401
+          render json: { error: 'Please provide correct username and password' }, status: 401
         end
       end
 
@@ -18,12 +18,11 @@ module Api
       end
 
       def user_data(user)
-        obj ={
+        {
           id: user.id,
           username: user.username,
           admin: user.admin
         }
-        obj
       end
     end
   end

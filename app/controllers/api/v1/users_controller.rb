@@ -25,12 +25,11 @@ module Api
       end
 
       def user_data(user)
-        obj = {
+        {
           id: user.id,
           username: user.username,
           admin: user.admin
         }
-        obj
       end
     end
   end

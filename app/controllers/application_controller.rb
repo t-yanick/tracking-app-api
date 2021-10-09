@@ -4,7 +4,6 @@ class ApplicationController < ActionController::API
   # EXPIRES_IN = Rails.application.credentials.jwt[:expires_in]
   EXPIRES_IN = 2
 
-
   def authorized
     render json: { message: 'Please log in' }, status: 401 unless logged_in?
   end
@@ -17,7 +16,7 @@ class ApplicationController < ActionController::API
   def auth_header
     return unless request.headers['Authorization']
 
-    request.headers['Authorization'].split(' ')[1]
+    request.headers['Authorization'].split[1]
   end
 
   def decoded_token
