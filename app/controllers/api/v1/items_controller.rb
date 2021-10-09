@@ -32,25 +32,25 @@ module Api
         else
           render json: { error: 'Item could not be updated' }, status: 404
         end
+      end
 
-        def destroy
-          if @item
-            @item.destroy
-            render json: { message: 'Sucessfully deleted', deleted_item: @item }, status: 200
-          else
-            render json: { error: 'Item could not be deleted' }, status: 404
-          end
+      def destroy
+        if @item
+          @item.destroy
+          render json: { message: 'Sucessfully deleted', deleted_item: @item }, status: 200
+        else
+          render json: { error: 'Item could not be deleted' }, status: 404
         end
+      end
 
-        private
+      private
 
-        def item_params
-          params.require(:item).permit(:title, :unit, :icon, :target)
-        end
+      def item_params
+        params.require(:item).permit(:title, :unit, :icon, :target)
+      end
 
-        def set_item
-          @item = Item.find(params[:id])
-        end
+      def set_item
+        @item = Item.find(params[:id])
       end
     end
   end
