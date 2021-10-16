@@ -6,9 +6,9 @@ module Api
       before_action :set_record, only: %i[show update destroy]
 
       def index
-        # @records = Record.all_records(@current_user)
+        # @records = Record.all_records
         @records = Record.all
-        # @record_dates = Record.all_record_dates(@current_user)
+        # @record_dates = Record.all_record_dates
         @record_dates = Record.all
 
         if @records
