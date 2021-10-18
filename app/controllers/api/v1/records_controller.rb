@@ -1,15 +1,15 @@
 module Api
   module V1
     class RecordsController < ApplicationController
-      # before_action :authorized
+      before_action :authorized
       skip_before_action :verify_authenticity_token, raise: false
       before_action :set_record, only: %i[show update destroy]
 
       def index
-        # @records = Record.all_records
-        @records = Record.all
-        # @record_dates = Record.all_record_dates
-        @record_dates = Record.all
+        @records = Record.all_records(@current_user)
+        # @records = Record.all
+        @record_dates = Record.all_record_dates(@current_user)
+        # @record_dates = Record.all
 
         if @records
           render json: { records: @records, record_dates: @record_dates }, status: 200
@@ -28,9 +28,11 @@ module Api
       end
 
       def create
-        @record = @current_user.records.create(result: record_params[:result], item_id: record_params[:itemId],
-                                               date: record_params[:date])
-
+        # rubocop:disable Layout/LineLength
+        # @record = @current_user.records.create!(result: record_params[:result], item_id: record_params[:itemId], date: record_params[:date])
+        @record = @current_user.records.create(record_params)
+        # rubocop:enable Layout/LineLength
+        puts @record
         if @record.valid?
           render json: @record, status: 201
         else
@@ -39,7 +41,7 @@ module Api
       end
 
       def update
-        if @record.update(result: record_params[:result], item_id: record_params[:itemId], date: record_params[:date])
+        if @record.update(result: record_params[:result], item_id: record_params[:item_id], date: record_params[:date])
           render json: @record, status: 200
         else
           render json: { error: 'Track could not be opdated.' }, status: 422
@@ -62,7 +64,7 @@ module Api
       end
 
       def record_params
-        params.require(:record).permit(:result, :item_id, :date, :itemId)
+        params.require(:record).permit(:result, :item_id, :date)
       end
     end
   end
